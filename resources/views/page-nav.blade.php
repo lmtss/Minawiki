@@ -37,47 +37,28 @@
     </ul>
 @else
     <!--User-->
-    {{--<div id="left-nav-ul" class="collection theme-word-dark">--}}
-    <ul class="collection theme-word-dark">
+    <div class="collection theme-word-dark">
         @foreach($left_data as $item)
             @if($item->id == $current_page->id)
-
-                <li class="collection">
-                    <a href="/{{ $item->title }}" class="collection-item active"><span
-                                class="badge">{{ $item->comments->count() > 0 ? $item->comments->count() : '' }}</span>{{ $item->title }}
-                    </a>
-                </li>
+                <a href="/{{ $item->title }}" class="collection-item active"><span
+                            class="badge">{{ $item->comments->count() > 0 ? $item->comments->count() : '' }}</span>{{ $item->title }}</a>
             @else
-                <li class="collection">
-                    <a href="/{{ $item->title }}" class="collection-item"><span
-                                class="badge">{{ $item->comments->count() > 0 ? $item->comments->count() : '' }}</span>{{ $item->title }}
-                    </a>
-                </li>
+                <a href="/{{ $item->title }}" class="collection-item"><span
+                            class="badge">{{ $item->comments->count() > 0 ? $item->comments->count() : '' }}</span>{{ $item->title }}</a>
             @endif
         @endforeach
         @if(!$left_data_page->protect_children)
             @if(isset($uid))
-                <li class="collection">
-                    <a href="javascript: showAddPageModal()" class="collection-item modal-trigger"
-                       style="text-align: center"><i
-                                class="material-icons">
-                            &#xE147;</i></a>
-                </li>
+                <a href="javascript: showAddPageModal()" class="collection-item modal-trigger"
+                   style="text-align: center"><i
+                            class="material-icons">
+                        &#xE147;</i></a>
             @else
-                <li class="collection">
                     <a href="/auth/login?continue={{ urlencode($continue) }}" class="collection-item modal-trigger"
                        style="text-align: center"><i
                                 class="material-icons">
                             &#xE147;</i></a>
-                </li>
             @endif
         @endif
-    </ul>
     </div>
 @endif
-
-<script>
-    $(document).ready(function () {
-        Materialize.showStaggeredList('ul');
-    });
-</script>

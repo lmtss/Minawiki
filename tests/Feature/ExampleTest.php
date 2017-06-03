@@ -10,7 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseTransactions;
 use App\Page;
 
 
-class ExampleTest extends BrowserKitTestCase
+class ExampleTest extends TestCase
 {
     /**
      * A basic test example.
@@ -23,5 +23,7 @@ class ExampleTest extends BrowserKitTestCase
 
         $this->visit('/')
             ->see('Minawiki');
+
+
     }
 }

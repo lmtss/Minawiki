@@ -20,7 +20,7 @@ Route::get('/{title?}', 'IndexController@index');
 Route::get('auth/geetest','AuthController@getGeetest');
 //Register
 Route::get('/auth/register', 'AuthController@showRegisterView');
-Route::post('/auth/register/captcha', 'AuthController@sendRegTextCaptcha');
+Route::post('/auth/register/captcha', 'AuthController@sendTextCaptcha');
 Route::post('/auth/register', 'AuthController@addUser');
 //Login
 Route::get('/auth/login', 'AuthController@showLoginView');
@@ -53,3 +53,13 @@ Route::get('/{title}/comment', 'CommentController@index');
 Route::post('/{title}/comment', 'CommentController@store')->middleware('checklogin');
 Route::delete('/{title}/comment/{id}', 'CommentController@destroy')->middleware('checklogin');
 Route::post('/{title}/comment/{id}/star', 'CommentController@star')->middleware('checklogin');
+
+//Notice Manage
+Route::post('/{title}/notice','NoticeController@store')->middleware('checkadmin');
+Route::delete('/{title}/notice/{id}','NoticeController@destroy')->middleware('checkadmin');
+
+//User Manage
+Route::get('/user/all','UserController@allUser')->middleware('checkadmin');
+
+//System Message Manage
+Route::post('/admin/systemMessage','SystemMessageController@store')->middleware('checkadmin');
