@@ -57,6 +57,7 @@ Route::post('/{title}/comment/{id}/star', 'CommentController@star')->middleware(
 //Notice Manage
 Route::post('/{title}/notice','NoticeController@store')->middleware('checkadmin');
 Route::delete('/{title}/notice/{id}','NoticeController@destroy')->middleware('checkadmin');
+Route::get('/{title}/notice','NoticeController@index');
 
 //User Manage
 Route::get('/user/all','UserController@allUser')->middleware('checkadmin');
