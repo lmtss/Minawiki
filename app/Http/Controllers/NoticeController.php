@@ -10,6 +10,7 @@ use App\StarMessage;
 use App\Page;
 use Parsedown;
 
+
 class NoticeController extends Controller
 {
     /**
@@ -18,6 +19,26 @@ class NoticeController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
+    
+    public function index(Request $request, $title)
+    {
+        $page = Page::where('title', $title)->first();
+        if(empty($page))
+            return json_encode(array(
+                'result' => 'false',
+                'msg' => 'invalid title'
+            ));
+
+        $comments = Comment::where('page_id',$page->id)->where('position','notice');
+
+        if ($request->session()->has('user.id'))
+            return view('comment', ['paginator' => $comments, 'power' => $request->session()->get('user.power'),
+                'uid' => $request->session()->get('user.id')
+            ]);
+        else
+            return view('comment', ['paginator' => $comments,  'continue' => '/' . $title]);
+    }
+    
     public function store(Request $request, $title)
     {
         $page = Page::where('title', $title)->first();
